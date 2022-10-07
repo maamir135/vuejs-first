@@ -10,39 +10,75 @@
 </head>
 <body>
     <style>
-        
-        .text-green{
-            color: green;
-        }
-        .text-red{
-            color: red;
-        }
 
     </style>
     <div id="app">
+        <section class="p-5" v-show="inprogressAssignment.length">
+            <h2>In progress</h2>
+            <ul>
 
-        <button v-bind:class="buttonGreen">Click me</button>
-        <br>
-        <button v-bind:class="active ? 'text-green' : 'text-red'" class="mt-4" v-on:click="toggle">Click me</button>
+                <li v-for="assignment in inprogressAssignment" :key="assignment.id">
+                    <label for="">
+                        {{ assignment.name }}
+                        <input type="checkbox" v-model="assignment.complete">
+                    </label>
+                    
+                </li>
+
+                <!-- <li>Finish project
+                    <input type="checkbox">
+                </li>
+                <li>Read chapter 4
+                    <input type="checkbox">
+                </li>
+                <li>Turn in home work
+                    <input type="checkbox">
+                </li> -->
+            </ul>
+        </section>
+
+        <section class="p-5"  v-if="completedAssignment.length">
+            <h2>Completed</h2>
+
+            <ul>
+                <li v-for="assignment in completedAssignment">
+                    <label for="">
+                        {{ assignment.name }}
+                        <input type="checkbox" v-model="assignment.complete" :key="assignment.id">
+                    </label>
+                    
+                </li>
+            </ul>
+        </section>
+
 
     </div>
 
     <script>
-        Vue.createApp({
+
+        let app = {
             data(){
                 return {
-                    // buttonGreen: 'text-green'
-                    active: false
-                };
+                    assignments: [
+                        {name: 'Finish projects', complete: false, id:"1"},
+                        {name: 'Read projects', complete: false, id:"2" },
+                        {name: 'Turn in home', complete: false, id:"3"}
+
+                    ]
+                }
             },
-            methods:{
-                toggle(){
-                    // alert('toggle');
-                    // this.buttonGreen = 'text-red'
-                    this.active = ! this.active;
+            computed:{
+                completedAssignment(){
+                    return this.assignments.filter(assignment => assignment.complete);
+                },
+                inprogressAssignment(){
+                    return this.assignments.filter(assignment => !assignment.complete);
+                    
                 }
             }
-        }).mount('#app');
+        };
+
+        Vue.createApp(app).mount('#app');
     </script>
 
 </body>
