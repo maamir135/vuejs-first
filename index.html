@@ -14,7 +14,7 @@
 
         <!-- with slot  -->
         <div>
-            <app-button >Submit</app-button>  
+            <app-button type="hoeww">Submit</app-button>  
         </div>
         <!-- <div>
             <app-button class="mt-1">Click me</app-button>  
@@ -26,14 +26,10 @@
     </div>
 
     <script type="module">
-        import  AppButton  from "./js/components/AppButton.js";
-        let app = {
-            components:{
-                'app-button':AppButton,
-            }
-        };
+        import App from "./js/components/App.js";
         
-        Vue.createApp(app).mount('#app');
+        
+        Vue.createApp(App).mount('#app');
     </script>
 
 </body>
