@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>Vuejs Practice</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<body>
+    <style>
+
+    </style>
+    <div id="app">
+        <section class="p-5" v-show="inprogressAssignment.length">
+            <h2>In progress</h2>
+            <ul>
+
+                <li v-for="assignment in inprogressAssignment" :key="assignment.id">
+                    <label for="">
+                        {{ assignment.name }}
+                        <input type="checkbox" v-model="assignment.complete">
+                    </label>
+                    
+                </li>
+
+                <!-- <li>Finish project
+                    <input type="checkbox">
+                </li>
+                <li>Read chapter 4
+                    <input type="checkbox">
+                </li>
+                <li>Turn in home work
+                    <input type="checkbox">
+                </li> -->
+            </ul>
+        </section>
+
+        <section class="p-5"  v-if="completedAssignment.length">
+            <h2>Completed</h2>
+
+            <ul>
+                <li v-for="assignment in completedAssignment">
+                    <label for="">
+                        {{ assignment.name }}
+                        <input type="checkbox" v-model="assignment.complete" :key="assignment.id">
+                    </label>
+                    
+                </li>
+            </ul>
+        </section>
+
+
+    </div>
+
+    <script>
+
+        let app = {
+            data(){
+                return {
+                    assignments: [
+                        {name: 'Finish projects', complete: false, id:"1"},
+                        {name: 'Read projects', complete: false, id:"2" },
+                        {name: 'Turn in home', complete: false, id:"3"}
+
+                    ]
+                }
+            },
+            computed:{
+                completedAssignment(){
+                    return this.assignments.filter(assignment => assignment.complete);
+                },
+                inprogressAssignment(){
+                    return this.assignments.filter(assignment => !assignment.complete);
+                    
+                }
+            }
+        };
+
+        Vue.createApp(app).mount('#app');
+    </script>
+
+</body>
+</html>

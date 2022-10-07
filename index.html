@@ -8,76 +8,46 @@
     <title>Vuejs Practice</title>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 </head>
-<body>
-    <style>
-
-    </style>
+<body class="text-center p-5">
     <div id="app">
-        <section class="p-5" v-show="inprogressAssignment.length">
-            <h2>In progress</h2>
-            <ul>
+        <!-- <app-button ></app-button>  -->
 
-                <li v-for="assignment in inprogressAssignment" :key="assignment.id">
-                    <label for="">
-                        {{ assignment.name }}
-                        <input type="checkbox" v-model="assignment.complete">
-                    </label>
-                    
-                </li>
+        <!-- with slot  -->
+        <div>
+            <app-button >Submit</app-button>  
+        </div>
+        <!-- <div>
+            <app-button class="mt-1">Click me</app-button>  
+        </div> -->
 
-                <!-- <li>Finish project
-                    <input type="checkbox">
-                </li>
-                <li>Read chapter 4
-                    <input type="checkbox">
-                </li>
-                <li>Turn in home work
-                    <input type="checkbox">
-                </li> -->
-            </ul>
-        </section>
-
-        <section class="p-5"  v-if="completedAssignment.length">
-            <h2>Completed</h2>
-
-            <ul>
-                <li v-for="assignment in completedAssignment">
-                    <label for="">
-                        {{ assignment.name }}
-                        <input type="checkbox" v-model="assignment.complete" :key="assignment.id">
-                    </label>
-                    
-                </li>
-            </ul>
-        </section>
+        <!-- with slot end  -->
 
 
     </div>
 
     <script>
-
         let app = {
-            data(){
-                return {
-                    assignments: [
-                        {name: 'Finish projects', complete: false, id:"1"},
-                        {name: 'Read projects', complete: false, id:"2" },
-                        {name: 'Turn in home', complete: false, id:"3"}
+            components:{
+                'app-button': {
+                    template:
+                    // ` <button class="btn-dark rounded">Hi there</button> `
+                    // slot 
+                    ` <button class="btn-dark rounded" :disabled="processing">
+                        <slot />
+                    </button> `
 
-                    ]
-                }
-            },
-            computed:{
-                completedAssignment(){
-                    return this.assignments.filter(assignment => assignment.complete);
-                },
-                inprogressAssignment(){
-                    return this.assignments.filter(assignment => !assignment.complete);
-                    
+                    // slot end 
+
+                        ,
+                    data(){
+                        return {
+                            processing: true
+                        };
+                    }   
                 }
             }
         };
-
+        
         Vue.createApp(app).mount('#app');
     </script>
 
