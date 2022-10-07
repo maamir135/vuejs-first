@@ -4,35 +4,44 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <title>Vuejs Practice</title>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 </head>
 <body>
-    
-    <div id="app">
+    <style>
         
-        <p>
-            <input type="text" v-model="greeting">
-        </p>
+        .text-green{
+            color: green;
+        }
+        .text-red{
+            color: red;
+        }
 
-        <p>
-            {{greeting}} ({{greeting.length}})
-        </p>
+    </style>
+    <div id="app">
+
+        <button v-bind:class="buttonGreen">Click me</button>
+        <br>
+        <button v-bind:class="active ? 'text-green' : 'text-red'" class="mt-4" v-on:click="toggle">Click me</button>
+
     </div>
 
     <script>
         Vue.createApp({
             data(){
                 return {
-                    greeting: 'Hello World'
+                    // buttonGreen: 'text-green'
+                    active: false
                 };
             },
-            mounted(){
-                setTimeout(() => {
-                    this.greeting = "changed"
-                }, 3000);
+            methods:{
+                toggle(){
+                    // alert('toggle');
+                    // this.buttonGreen = 'text-red'
+                    this.active = ! this.active;
+                }
             }
-
         }).mount('#app');
     </script>
 
