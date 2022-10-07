@@ -25,26 +25,11 @@
 
     </div>
 
-    <script>
+    <script type="module">
+        import  AppButton  from "./js/components/AppButton.js";
         let app = {
             components:{
-                'app-button': {
-                    template:
-                    // ` <button class="btn-dark rounded">Hi there</button> `
-                    // slot 
-                    ` <button class="btn-dark rounded" :disabled="processing">
-                        <slot />
-                    </button> `
-
-                    // slot end 
-
-                        ,
-                    data(){
-                        return {
-                            processing: true
-                        };
-                    }   
-                }
+                'app-button':AppButton,
             }
         };
         
